@@ -1,109 +1,42 @@
-01 - Primeiros passos com PHP
+02 - Inserindo produtos no banco de dados
 
-- Instalado o ambiente PHP usando o xammp
-- Criado um index para testar.
-- Criado arquivos produto-formulario.php, cabecalho.php, variaveis variaves para receber os dados envoados do formualrio.
+01 - Inserindo produtos no banco de dados
 
-02 - PHP, a sintaxe básica I
-
-if, else, operadores logicos, declacao de variavel $variavel = valor;
-
-
-03 - Praticando a sintaxe I
-
-Vamos praticar um pouco a sintaxe do PHP!
-Verifique se as opções abaixo estão corretas:
-Imprimimos dados concatenados através do .*(ponto)*;
-Para declararmos variáveis, não precisamos do tipo, apenas de $;
-
-04 - PHP, a sintaxe básica II
-
-declaração de função
+<?php include("cabecalho.php");?>
 <?php
-    function somaDoisNumeros($n1, $n2){
-        $soma = $n1+$n2;
-        return $soma;
-    }
-    //numeros que serão somados
-    $a = 60;
-    $b = 40;
-    //chamando a função
-    $resultado = somaDoisNumeros($a, $b);
-    echo $resultado;
-?>
-
-
-05 - Praticando a sintaxe II
-<?php
-	function somaNumeros($array_numeros){
-	    $soma = 0;
-		for($i = 0; $i < sizeof($array_numeros); $i++){
-			$soma += $array_numeros[$i];
-		}
-		return $soma;
-	}
-	$numeros = array(10,10,10,10,10);  
-	echo somaNumeros($numeros);
-?>
-
-
-06 - Instalando o XAMPP e o Sublime
-Instaldo no linux.
-
-
-07 - Criando o primeiro HTML
-Criado diretório dentro do XAMPP (/htdocs/loja no diretório de instalação).
-
-08 - Primeira versão do adiciona-produto
-<html>
-<?php
-$nome = $_GET["nome"];
-?>
-Produto <?php echo $nome; ?> adicionado com sucesso!
-</html>
-
-09 - Exibindo o preço
-<html>
-<?php
-$nome = $_GET["nome"];
-$preco = $_GET["preco"];
-?>
-Produto <?= $nome; ?>, <?= $preco; ?> adicionado com sucesso!
-</html>
-
-10 - Criando o formulário
-<html>
-  <h1>Formulário de cadastro</h1>
-    <form action="adiciona-produto.php">
-        Nome: <input type="text" name="nome" /><br/>
-        Preço: <input type="number" name="preco" /><br/>
-
-        <input type="submit" value="Cadastrar" />
-    </form>
-</html>
-
-
-11 - Cabeçalho e rodapé
-Criado arquivos php com o cabeçalho e rodape e incluído nos demais arquivos.
-
-
-12 - Primeira opinião
-O PHP é uma linguagem bastante popular e produtiva. Veja que com poucas linhas de código já conseguimos capturar dados do usuário e exibí-los.
-Nos próximos capítulos, acessaremos banco de dados, e as coisas ficarão ainda mais interessantes.
-
-
-13 - Fazendo contas
-
-<?php
-$total = 10 + 20 / 4;
-echo $total;
-?>
-
-14 - Código devolvido ao cliente
-
-O resultado é o conteúdo de nossa página html. Repare então que mesmo que a página html não exista no servidor, ele é um programa capaz de devolver texto... e esse texto é a página que o cliente vai interpretar.
-
-Essa é a importância de um servidor: um programa que gera páginas a serem interpretadas pelo cliente. A página pode ser fixa ou dinâmica.
-
-
+	$nome = $_GET["nome"];
+	$preco = $_GET["preco"];
+    $conexao = mysqli_connect('localhost:3310', 'root', '', 'loja');
+	$query = "insert into produtos (nome, preco) values ('{$nome}', {$preco})";
+	if (mysqli_query($conexao, $query)){
+		?> <p class="alert-success">Produto <?php echo $nome; ?> no valor de  <?php echo $preco?> adicionado com sucesso!</p> <?php            		
+	} else{
+	   ?> <p class="alert-danger">Produto NÃO pode ser adicionado!</p> <?php  	
+	} ?>
 	
+<?php include("rodape.php");?>
+
+02 - Criando a tabela de produtos
+Criado tabelas.
+
+03 - Inserindo alguns produtos
+
+Agora insira alguns elementos na tabela.
+insert into produtos (nome, preco) values ('Carro', 20000);
+Adicione alguns outros produtos que desejar.
+
+04 - Inserindo no banco de dados
+$conexao = mysqli_connect('localhost:3310', 'root', '', 'loja');
+$query = "insert into produtos (nome, preco) values ('{$nome}', {$preco})";
+mysqli_query($conexao, $query);	
+
+05 - Fechando a conexão
+Por que podemos "esquecer" o mysql_close()?
+Porque o PHP detecta automaticamente que a conexão está aberta, e a fecha. Isso é ótimo, pois é muito comum que aplicações web esqueçam conexões abertas, e isso gera diversos problemas quando a aplicação é muito acessada (afinal, o banco de dados, que não sabe que o PHP acabou, mantém a conexão aberta por um tempo).
+
+06 - O "i" nos métodos
+Por que usamos os métodos mysqli_ e não mysql?
+O mysqli_* é o novo pacote de acesso ao MySql, onde eles melhoraram toda a parte de acesso ao banco de dados.
+O mysql_* ainda existe apenas por questões de compatibilidade.
+
+
