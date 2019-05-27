@@ -1,42 +1,59 @@
-02 - Inserindo produtos no banco de dados
+03 - Criando Funções no PHP
 
-01 - Inserindo produtos no banco de dados
+01 - Criando Funções no PHP
 
-<?php include("cabecalho.php");?>
+Criado função para realizar a inserção no banco de dados.
+
+
+02  - Criando a primeira função
+ 	function insereProduto($conexao, $nome, $preco){
+ 		$query = "insert into produtos (nome, preco) values ('{$nome}', {$preco})";
+ 		return mysqli_query($conexao, $query);
+ 	}
+
+
+
+03 - Usando a função
+Modifique o arquivo adiciona-produto.php e agora faça com que ele use a função.
+Depois, compare com a nossa solução.
+<?php include ("cabecalho.php"); ?>
 <?php
-	$nome = $_GET["nome"];
-	$preco = $_GET["preco"];
-    $conexao = mysqli_connect('localhost:3310', 'root', '', 'loja');
-	$query = "insert into produtos (nome, preco) values ('{$nome}', {$preco})";
-	if (mysqli_query($conexao, $query)){
-		?> <p class="alert-success">Produto <?php echo $nome; ?> no valor de  <?php echo $preco?> adicionado com sucesso!</p> <?php            		
+$nome = $_GET['nome'];
+$preco = $_GET['preco'];
+$conexao = mysqli_connect("localhost", "root", "", "loja");
+function insereProduto($conexao, $nome, $preco) {
+    $query = "insert into produtos (nome, preco) values ('{$nome}', '{$preco}')";
+    $resultadoDaInsercao = mysqli_query($conexao, $query);
+    return $resultadoDaInsercao;
+}
+if(insereProduto($conexao, $nome, $preco)) {
+?>
+<p class="alert-success">Produto <?= $nome; ?>, <?= $preco; ?> adicionado com sucesso!</p>
+<?php
+} else {
+?>
+<p class="alert-danger">O produto <? = $nome; ?> não foi adicionado</p>
+<?php
+}
+?>
+<?php include ("rodape.php"); ?>
+
+04 - Colocando menus
+Criado menu adicionado bootstrap
+
+05 - Melhorando o formulário
+Adicionado table e classes do bootstrap
+
+
+06 - mysqli_error
+Capiturado erro ao inserir e mostrado na tela
+
+	if (insereProduto($conexao, $nome, $preco)){
+		?> <p class="text-success">Produto <?php echo $nome; ?> no valor de  <?php echo $preco?> adicionado com sucesso!</p> <?php            		
 	} else{
-	   ?> <p class="alert-danger">Produto NÃO pode ser adicionado!</p> <?php  	
+		?> <p class="text-danger">Produto NÃO pode ser adicionado!</p> 
+		<?php $msg = mysql_error($conexao);
 	} ?>
-	
-<?php include("rodape.php");?>
 
-02 - Criando a tabela de produtos
-Criado tabelas.
-
-03 - Inserindo alguns produtos
-
-Agora insira alguns elementos na tabela.
-insert into produtos (nome, preco) values ('Carro', 20000);
-Adicione alguns outros produtos que desejar.
-
-04 - Inserindo no banco de dados
-$conexao = mysqli_connect('localhost:3310', 'root', '', 'loja');
-$query = "insert into produtos (nome, preco) values ('{$nome}', {$preco})";
-mysqli_query($conexao, $query);	
-
-05 - Fechando a conexão
-Por que podemos "esquecer" o mysql_close()?
-Porque o PHP detecta automaticamente que a conexão está aberta, e a fecha. Isso é ótimo, pois é muito comum que aplicações web esqueçam conexões abertas, e isso gera diversos problemas quando a aplicação é muito acessada (afinal, o banco de dados, que não sabe que o PHP acabou, mantém a conexão aberta por um tempo).
-
-06 - O "i" nos métodos
-Por que usamos os métodos mysqli_ e não mysql?
-O mysqli_* é o novo pacote de acesso ao MySql, onde eles melhoraram toda a parte de acesso ao banco de dados.
-O mysql_* ainda existe apenas por questões de compatibilidade.
-
-
+07 - Muitas funções?
+Na dúvida usar o manual do php.	
