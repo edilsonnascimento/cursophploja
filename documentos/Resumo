@@ -1,59 +1,17 @@
-03 - Criando Funções no PHP
+04 - Listando todos os produtos
 
-01 - Criando Funções no PHP
+01 - Listando todos os produtos
 
-Criado função para realizar a inserção no banco de dados.
+- Extrar codigo de conexão para outra classe.
+- Criado arquivo php para listar os produtos.
 
+ 02 - conecta.php
 
-02  - Criando a primeira função
- 	function insereProduto($conexao, $nome, $preco){
- 		$query = "insert into produtos (nome, preco) values ('{$nome}', {$preco})";
- 		return mysqli_query($conexao, $query);
- 	}
+Crie um arquivo chamado conecta.php, cujo objetivo é criar a conexão.
 
-
-
-03 - Usando a função
-Modifique o arquivo adiciona-produto.php e agora faça com que ele use a função.
-Depois, compare com a nossa solução.
-<?php include ("cabecalho.php"); ?>
+O arquivo deve ficar assim:
 <?php
-$nome = $_GET['nome'];
-$preco = $_GET['preco'];
 $conexao = mysqli_connect("localhost", "root", "", "loja");
-function insereProduto($conexao, $nome, $preco) {
-    $query = "insert into produtos (nome, preco) values ('{$nome}', '{$preco}')";
-    $resultadoDaInsercao = mysqli_query($conexao, $query);
-    return $resultadoDaInsercao;
-}
-if(insereProduto($conexao, $nome, $preco)) {
-?>
-<p class="alert-success">Produto <?= $nome; ?>, <?= $preco; ?> adicionado com sucesso!</p>
-<?php
-} else {
-?>
-<p class="alert-danger">O produto <? = $nome; ?> não foi adicionado</p>
-<?php
-}
-?>
-<?php include ("rodape.php"); ?>
 
-04 - Colocando menus
-Criado menu adicionado bootstrap
+03 - Inclua nos outros arquivos
 
-05 - Melhorando o formulário
-Adicionado table e classes do bootstrap
-
-
-06 - mysqli_error
-Capiturado erro ao inserir e mostrado na tela
-
-	if (insereProduto($conexao, $nome, $preco)){
-		?> <p class="text-success">Produto <?php echo $nome; ?> no valor de  <?php echo $preco?> adicionado com sucesso!</p> <?php            		
-	} else{
-		?> <p class="text-danger">Produto NÃO pode ser adicionado!</p> 
-		<?php $msg = mysql_error($conexao);
-	} ?>
-
-07 - Muitas funções?
-Na dúvida usar o manual do php.	
