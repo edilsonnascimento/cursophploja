@@ -14,9 +14,13 @@
 				<tr>
 			       <td><?=$produto['nome']?></td>
 			       <td><?=$produto['preco']?></td>
-			       <td class="btn btn-danger">
-			       		<a href="produto-remover.php?id=<?=$produto['id']?>">REMOVER</a>
-			       </td>
+			       <td><?=substr($produto['descricao'], 0, 60)?></td>
+			       <td>
+					   <form action="produto-remover.php" method="post">
+					   	    <input name="id" type="hidden" value="<?=$produto['id']?>" />
+				            <button class="btn btn-danger">remover</button>
+				       </form>
+				   </td>
 			   </tr>
 			<?php
 		endforeach
