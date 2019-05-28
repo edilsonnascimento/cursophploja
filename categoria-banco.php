@@ -1,5 +1,4 @@
 <?php
-
 	include("conecta.php");
 
 	function listaCategorias($conexao){
