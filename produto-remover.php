@@ -1,6 +1,6 @@
 <?php 
      include("cabecalho.php");
-     include("banco-produto.php");
+     include("produto-banco.php");
 ?>
 
 <?php 

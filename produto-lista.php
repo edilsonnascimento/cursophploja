@@ -1,6 +1,7 @@
 <?php 
       include("cabecalho.php");
-      include("banco-produto.php");
+      include("produto-banco.php");
+      include("categoria-banco.php");
 ?>
 
 <?php if(array_key_exists("removido", $_GET) && $_GET['removido'] == true){ ?>
@@ -15,6 +16,7 @@
 			       <td><?=$produto['nome']?></td>
 			       <td><?=$produto['preco']?></td>
 			       <td><?=substr($produto['descricao'], 0, 60)?></td>
+			       <td><?=$produto['categoria_nome']?></td>
 			       <td>
 					   <form action="produto-remover.php" method="post">
 					   	    <input name="id" type="hidden" value="<?=$produto['id']?>" />
