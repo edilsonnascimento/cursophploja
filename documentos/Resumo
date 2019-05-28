@@ -1,17 +1,118 @@
-04 - Listando todos os produtos
 
-01 - Listando todos os produtos
+09 - Lidando com Selects e Checkboxes
 
-- Extrar codigo de conexão para outra classe.
-- Criado arquivo php para listar os produtos.
 
- 02 - conecta.php
+# Criação de tableas no banco:
 
-Crie um arquivo chamado conecta.php, cujo objetivo é criar a conexão.
+- Adicionado no formulario
 
-O arquivo deve ficar assim:
-<?php
-$conexao = mysqli_connect("localhost", "root", "", "loja");
+CREATE TABLE `loja`.`produtos` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(60) NULL,
+  `preco` DECIMAL() NULL, 
+  `descricao` VARCHAR(45) NULL,
+  `categoria_id` INT NOT NULL,
+  PRIMARY KEY (`id`));
 
-03 - Inclua nos outros arquivos
+  CREATE TABLE `loja`.`categorias` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(60) NOT NULL,
+  PRIMARY KEY (`id`));
+
+insert into categorias (nome) values ("esporte"), ("escolar"), ("mobilidade"), ("higiene"), ("golozeimas");
+
+# Criando seletor.
+
+- Adiciondo no formulario:
+<tr>
+	<td>Categorias: </td>
+	<td>
+		<select name="categoria_id">
+    		<?php foreach ($categorias as $categoria) :  ?>
+    			<option value="<?=$categoria['id']?>">
+    				<?=$categoria['nome']?>
+    			</option>			    					
+    		<?php endforeach ?>		    			
+		</select>
+	</td>
+</tr>
+
+# Ckeck box
+
+- Criado campo no formulário:
+<tr>
+	<td></td>
+	<td>
+		<input type="radio" name="usado" value="true">
+		Usado
+	</td>   	
+</tr>
+
+- Adiconado campo na classe que recebe o formulario.
+$usado = $_POST['usado'];
+
+if(insereProduto($conexao, $nome, $preco, $descricao, $categoria_id, $usado)) {
+    // ...
+}
+
+- Adicionado na função insereProduto
+function insereProduto($conexao, $nome, $preco, $descricao, $categoria_id, $usado){
+	$query = "insert into produtos (nome, preco, descricao, categoria_id, usado) values ('{$nome}', {$preco}, '{$descricao}', {$categoria_id}, {$usado})";
+	echo $query;
+	return mysqli_query($conexao, $query);
+}	
+
+- Adicionado campo no banco de dados
+alter table produtos add column usado boolean default false;
+
+- Adicionado tratamento para checkbox.
+Como o checkbox não é selecionado ele não envia no post, dando erro na hora de inserir o produto.
+
+array_key_exists('usado', $_POST)
+Verifica se existe o campo 'usado' na URI.
+
+if(array_key_exists('usado', $_POST)) {
+    $usado = true;
+} else {
+    $usado = false;
+}
+
+- Mostrar no relatório se é usado ou não.
+<td>
+	<?php 
+		if($produto['usado'] == 0){ ?>
+			Não
+		<?php }
+		else{ ?>
+			Sim
+		<?php }
+	?>
+<td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

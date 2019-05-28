@@ -1,6 +1,6 @@
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <link href="resorces/css/loja.css" rel="stylesheet" >
     <link href="resorces/css/bootstrap.css" rel="stylesheet" >
     <title>Minha loja</title>
@@ -24,4 +24,4 @@
 
     <div class="container">
 
-    <div class="principal">
+        <div class="principal">

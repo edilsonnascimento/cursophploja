@@ -18,6 +18,15 @@
 			       <td><?=substr($produto['descricao'], 0, 60)?></td>
 			       <td><?=$produto['categoria_nome']?></td>
 			       <td>
+			       		<?php 
+			       			if($produto['usado'] == 0){ ?>
+			       				Não
+			       			<?php }
+			       			else{ ?>
+			       				Sim
+			       			<?php }
+			       		?>
+			       <td>
 					   <form action="produto-remover.php" method="post">
 					   	    <input name="id" type="hidden" value="<?=$produto['id']?>" />
 				            <button class="btn btn-danger">remover</button>
