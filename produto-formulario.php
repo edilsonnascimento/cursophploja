@@ -5,8 +5,6 @@
 
  	$categorias = listaCategorias($conexao);
  ?>
-
-  
 	<h1>Fomulario de Cadastro </h1>
 	<form action="produto-adiciona.php" method="post">
 		<table class="table">

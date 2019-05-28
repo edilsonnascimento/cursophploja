@@ -26,6 +26,10 @@
 			       				Sim
 			       			<?php }
 			       		?>
+			        </td>
+			        <td>
+			       		<a class="btn btn-primary" href="produto-formulario-altera.php?id=<?=$produto['id']?>">alterar</a>
+			       	</td>
 			       <td>
 					   <form action="produto-remover.php" method="post">
 					   	    <input name="id" type="hidden" value="<?=$produto['id']?>" />
@@ -33,9 +37,7 @@
 				       </form>
 				   </td>
 			   </tr>
-			<?php
-		endforeach
-	?>
+		<?php endforeach?>
 </table>	
 
 <?php include("rodape.php");?>
