@@ -1,0 +1,103 @@
+AULA
+01 - Uma ação de login
+
+01 - Vídeo 1
+
+- Continuar o CRUD da primeira parte do curdo.
+- Adicionar login.
+- Segurança.
+- Envio de mensagem.
+
+02 - Uma ação de login
+
+Implementado
+
+# Criado tabela de usuário no banco e inserido um usuário para teste.
+
+create table usuarios(
+	 id integer auto_increment primary key, 
+     email varchar(255), senha varchar(255)
+);
+
+insert into usuarios (email,senha) values ('edilson.nascimento@alura.com.br', '123');
+
+# ALterado a senha para Criptografia MD5:
+
+- Utilizado o site https://www.md5online.org/ para retornar o valor senhateste
+update usuarios set senha = '76bb1ff3699e0af3750e9fa119dea44e' where id = 1;
+
+# Criar formulário de login
+
+<?php include("cabecalho.php");?>
+<h2>Login</h2>
+<form>
+  <div class="form-group">
+  		<label>Email address</label>
+    	<input type="email" class="form-control" placeholder="Enter email">
+  </div>
+  <div class="form-group">
+    	<label>Password</label>
+    	<input type="password" class="form-control" placeholder="Password">
+  </div>	 
+  <button type="submit" class="btn btn-primary">Logar</button>
+</form>
+<?php include("rodape.php");?>
+
+# Criado Criado php para interagir com o banco de dados.
+<?php
+include("conecta.php");
+function buscaUsuario($conexao, $email, $senha){
+	$senhaMd5 = md5($senha);
+	$query = "SELECT * FROM usuarios WHERE email = '{$email}' AND senha = '{$senhaMd5}'";
+	$resultado = mysqli_query($conexao, $query);
+	$usuario = mysqli_fetch_assoc($resultado);
+	return $usuario;
+}
+
+# Arqivo para controlar o formulário.
+
+<?php 
+ include("login-banco.php");
+
+ $email = $_POST['email'];
+ $senha = $_POST['senha'];
+
+ if($usuario = buscaUsuario($conexao, $email, $senha)){
+ 	header("Location: index.php?login=o");
+ }else{
+ 	header("Location: index.php?login=1");
+ }
+ die();
+
+# 03 - Configurando o projeto
+ambiente já estava criado.
+
+# 04 - Alterando a conexão do banco
+Implmentado
+<?php
+    //$conexao = mysqli_connect('mysql465.umbler.com', 'usuariobanco', 'Rasper125', 'cursophploja');
+    $conexao = mysqli_connect('localhost:3310', 'root', '', 'loja');
+
+05 - Tabela de usuários
+Implementado
+
+06 - Criando o formulário de login
+Implementado
+
+07 - Criando a lógica de login
+Implementado
+
+08 - Redirecionando o usuário
+Implementado
+
+09 - Quais strings são false?
+Quais strings são consideradas false em PHP?
+As strings "0" e "" são consideradas false pelo PHP.
+
+10 - Testando "true" e true
+
+Já sabemos que === evita a mudança de tipo enquanto == faz a conversão. Compare "true" com true das duas maneiras. Quais os resultados? Qual o motivo?
+"true" == true pois toda string diferente de "0" e "" é verdadeira. "true" !== true pois os tipos são diferentes, um é string, o outro é boolean.
+
+
+
