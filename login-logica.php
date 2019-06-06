@@ -1,7 +1,9 @@
 <?php
 
+session_start();
+
 	function usuarioEstaLogado() {
-    	return isset($_COOKIE["usuario_logado"]);
+    	return isset($_SESSION["usuario_logado"]);
 	}
 
 	function verificaUsuario() {
@@ -12,15 +14,13 @@
 	}	
 
 	function usuarioLogado() {
-	    return $_COOKIE["usuario_logado"];
+	    return $_SESSION["usuario_logado"];
 	}
 
-	function logaUsuario($usuario){
-		if($usuario == null){
-			header("Location: index.php?login=0");
-		}else{
-			setcookie("usuario_logado", $usuario["email"], time() + 60);
-	 		header("Location: index.php?login=1");
-		}
-		die();
+	function logaUsuario($email){
+		$_SESSION["usuario_logado"] = $email;
+	}
+
+	function logout(){
+		session_destroy();
 	}
