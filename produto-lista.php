@@ -2,13 +2,9 @@
       include("cabecalho.php");
       include("produto-banco.php");
       include("categoria-banco.php");
-      include("login-logica.php");
 
-if(isset($_SESSION["success"])) { ?>
-	<p class="text-success"><?=$_SESSION["success"]?></p>
-<?php 
-    unset($_SESSION["success"]);
-}?>
+	mostraAlerta("success");
+?>
 
 <table class="table table-striped table-bordered">
 	<?php $produtos = listaProduto($conexao); 
