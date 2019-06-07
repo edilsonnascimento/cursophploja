@@ -11,7 +11,6 @@
 	}else{
 		$usado = "false";
 	}
-	
 
 	if (insereProduto($conexao, $nome, $preco, $descricao, $categoria_id, $usado)){
 		?> <p class="text-success">Produto <?php echo $nome; ?> no valor de  <?php echo $preco?> adicionado com sucesso!</p> <?php            		
