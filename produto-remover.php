@@ -1,7 +1,7 @@
 <?php 
-     include("cabecalho.php");
-     include("produto-banco.php");
-     include("login-logica.php");
+     require_once("cabecalho.php");
+     require_once("produto-banco.php");
+     require_once("login-logica.php");
 ?>
 
 <?php 
@@ -12,4 +12,4 @@
 	die();
 ?>
 
-<?php include("rodape.php");?>
+<?php require_once("rodape.php");?>

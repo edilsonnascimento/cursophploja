@@ -1,7 +1,7 @@
 <?php 
- 	include("cabecalho.php"); 
- 	include("categoria-banco.php");
- 	include("login-logica.php");
+ 	require_once("cabecalho.php"); 
+ 	require_once("categoria-banco.php");
+ 	require_once("login-logica.php");
 
     verificaUsuario();
 
@@ -13,7 +13,7 @@
 	<form action="produto-adiciona.php" method="post">
 		<table class="table">
 
-			<?php include("produto-formulario-base.php"); ?>
+			<?php require_once("produto-formulario-base.php"); ?>
 
 		    <tr>
 		    	<td><input class="btn-primary" type="submit" value="Cadastrar"></td>
@@ -21,4 +21,4 @@
 		</table>
 	</form>
 
-<?php include("rodape.php"); ?>
+<?php require_once("rodape.php"); ?>

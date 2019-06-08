@@ -1,6 +1,6 @@
 <?php 
-	include("login-banco.php");
-	include("login-logica.php");
+	require_once("login-banco.php");
+	require_once("login-logica.php");
 
 	$email = $_POST['email'];
 	$senha = $_POST['senha'];

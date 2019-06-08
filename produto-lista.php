@@ -1,7 +1,7 @@
 <?php 
-      include("cabecalho.php");
-      include("produto-banco.php");
-      include("categoria-banco.php");
+      require_once("cabecalho.php");
+      require_once("produto-banco.php");
+      require_once("categoria-banco.php");
 
 	mostraAlerta("success");
 ?>
@@ -38,4 +38,4 @@
 		<?php endforeach?>
 </table>	
 
-<?php include("rodape.php");?>
+<?php require_once("rodape.php");?>

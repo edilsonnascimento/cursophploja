@@ -1,4 +1,4 @@
-<?php include("cabecalho.php");
+<?php require_once("cabecalho.php");
 
 mostraAlerta("danger");
 mostraAlerta("success");
@@ -16,4 +16,4 @@ mostraAlerta("success");
 		  <button type="submit" class="btn btn-primary">Logar</button>
 	</form>
 
-<?php include("rodape.php");?>
+<?php require_once("rodape.php");?>

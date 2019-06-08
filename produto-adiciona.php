@@ -1,6 +1,6 @@
 <?php 
-	include("cabecalho.php");
-    include("produto-banco.php");
+	require_once("cabecalho.php");
+    require_once("produto-banco.php");
 
 	$nome = $_POST['nome'];
 	$preco = $_POST['preco'];
@@ -19,4 +19,4 @@
 		<?php $msg = mysql_error($conexao);
 	} ?>
 
-<?php include("rodape.php");?>
+<?php require_once("rodape.php");?>

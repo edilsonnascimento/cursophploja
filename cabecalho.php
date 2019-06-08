@@ -1,4 +1,4 @@
-<?php include("mostra-alerta.php");
+<?php require_once("mostra-alerta.php");
       error_reporting(E_ALL ^ E_NOTICE);
       mostraAlerta($tipo);
 ?>
